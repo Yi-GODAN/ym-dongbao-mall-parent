@@ -48,7 +48,7 @@ public class UMSApplicationTest {
         umsMember.setNote("我是一个粉刷匠");
         umsMember.setEmail("1921682112@gmail.com");
 
-        UmsMemberService umsMemberService = new UmsMemberServiceImpl();
-        umsMemberService.insertMember(umsMember);
+//        UmsMemberService umsMemberService = new UmsMemberServiceImpl();
+//        umsMemberService.insertMember(umsMember);
     }
 }

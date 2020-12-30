@@ -16,7 +16,7 @@ public class GeneratorApplication {
         //全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setAuthor("YiMing")
-                .setOutputDir("F:\\ProgrammingSoft\\Java\\IntelliJ IDEA\\workspace\\ym-dongbao-mall-parent\\ym-dongbao-generator\\src\\main\\java")//设置输出路径
+                .setOutputDir("F:\\ProgrammingSoft\\Java\\IntelliJ IDEA\\workspace\\ym-dongbao-mall-parent\\ym-dongbao-service\\ym-dongbao-ums\\src\\main\\java")//设置输出路径
                 .setFileOverride(true)//设置文件覆盖
                 .setIdType(IdType.AUTO)//设置主键生成策略
                 .setServiceName("%sService")//service接口的名称
@@ -26,7 +26,7 @@ public class GeneratorApplication {
 
         //配置数据源
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver").setUrl("jdbc:mysql://192.168.1.200:3306/ym-dongbao-test?characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC")
+        dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver").setUrl("jdbc:mysql://192.168.1.200:3306/ym-dongbao-test?characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai")
                 .setUsername("root").setPassword("root");
 
         //策略配置
@@ -40,7 +40,7 @@ public class GeneratorApplication {
         PackageConfig packageConfig = new PackageConfig();
         packageConfig.setParent("com.yiming").setMapper("mapper")
                 .setService("service").setController("controller")
-                .setEntity("bean").setXml("mapper");
+                .setEntity("entity").setXml("mapper");
 
         autoGenerator.setGlobalConfig(globalConfig).setDataSource(dataSourceConfig)
                 .setStrategy(strategyConfig).setPackageInfo(packageConfig);
