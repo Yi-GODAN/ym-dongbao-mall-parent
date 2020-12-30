@@ -15,30 +15,26 @@
 
     <description>用户中心模块实现</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.4.1</spring-boot.version>
-    </properties>
+    <!--    <properties>-->
+    <!--        <java.version>1.8</java.version>-->
+    <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+    <!--        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
+    <!--        <spring-boot.version>2.4.1</spring-boot.version>-->
+    <!--    </properties>-->
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <!--    <dependencyManagement>-->
+    <!--        <dependencies>-->
+    <!--            <dependency>-->
+    <!--                <groupId>org.springframework.boot</groupId>-->
+    <!--                <artifactId>spring-boot-dependencies</artifactId>-->
+    <!--                <version>${spring-boot.version}</version>-->
+    <!--                <type>pom</type>-->
+    <!--                <scope>import</scope>-->
+    <!--            </dependency>-->
+    <!--        </dependencies>-->
+    <!--    </dependencyManagement>-->
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
         <dependency>
@@ -67,12 +63,12 @@
             <version>8.0.22</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
@@ -81,14 +77,14 @@
             <version>1.2.9</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+      <!--  &lt;!&ndash; https://mvnrepository.com/artifact/log4j/log4j &ndash;&gt;
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.projectlombok/lombok &ndash;&gt;
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -107,13 +103,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.30</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test-autoconfigure</artifactId>
-            <version>2.4.1</version>
-            <scope>test</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

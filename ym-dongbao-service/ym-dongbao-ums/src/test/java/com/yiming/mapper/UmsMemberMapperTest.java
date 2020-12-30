@@ -17,7 +17,7 @@ class UmsMemberMapperTest {
     @Test
     void insertMember() {
         UmsMember t = new UmsMember();
-        t.setUsername("mazi");
+        t.setUsername("zhaoliu");
         t.setPassword("123");
         t.setNickName("小三");
         t.setNote("我是一个粉刷匠");
