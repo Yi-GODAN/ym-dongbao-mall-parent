@@ -1,6 +1,6 @@
-package com.yiming.service;
+package com.yiming.dongbao.ums.service;
 
-import com.yiming.entity.UmsMember;
+import com.yiming.dongbao.ums.entity.UmsMember;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

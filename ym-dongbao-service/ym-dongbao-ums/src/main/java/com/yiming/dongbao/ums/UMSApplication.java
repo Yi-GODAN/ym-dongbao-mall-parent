@@ -1,9 +1,8 @@
-package com.yiming;
+package com.yiming.dongbao.ums;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Program: ym-dongbao-mall-parent
@@ -12,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Created: 2020/12/25 18:44
  */
 @SpringBootApplication
-@MapperScan("com.yiming.mapper")
+@MapperScan("com.yiming.dongbao.ums.mapper")
 public class UMSApplication {
 
     public static void main(String[] args) {

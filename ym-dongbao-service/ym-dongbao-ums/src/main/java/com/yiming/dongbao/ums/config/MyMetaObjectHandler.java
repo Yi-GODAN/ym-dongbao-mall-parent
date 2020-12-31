@@ -1,4 +1,4 @@
-package com.yiming.config;
+package com.yiming.dongbao.ums.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;

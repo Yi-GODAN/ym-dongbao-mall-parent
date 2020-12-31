@@ -1,4 +1,4 @@
-package com.yiming.entity;
+package com.yiming.dongbao.ums.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

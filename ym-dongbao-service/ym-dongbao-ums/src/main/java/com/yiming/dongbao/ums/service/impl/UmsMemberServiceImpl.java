@@ -1,8 +1,8 @@
-package com.yiming.service.impl;
+package com.yiming.dongbao.ums.service.impl;
 
-import com.yiming.entity.UmsMember;
-import com.yiming.mapper.UmsMemberMapper;
-import com.yiming.service.UmsMemberService;
+import com.yiming.dongbao.ums.entity.UmsMember;
+import com.yiming.dongbao.ums.mapper.UmsMemberMapper;
+import com.yiming.dongbao.ums.service.UmsMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
