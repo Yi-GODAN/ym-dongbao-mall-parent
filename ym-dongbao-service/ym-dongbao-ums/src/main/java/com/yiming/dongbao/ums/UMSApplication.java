@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author: YiMing
  * @Created: 2020/12/25 18:44
  */
-@SpringBootApplication
+//@SpringBootApplication
 @MapperScan("com.yiming.dongbao.ums.mapper")
 public class UMSApplication {
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.yiming.dongbao.ums.mapper.UmsMemberMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yiming.dongbao.ums.entity.UmsMember">
+    <resultMap id="BaseResultMap" type="com.yiming.dongbao.ums.api.entity.UmsMember">
         <id column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />
@@ -21,5 +21,9 @@
     <sql id="Base_Column_List">
         id, username, password, icon, email, nick_name, note, login_time, gmt_create, gmt_modified, status
     </sql>
+
+    <select id="selectUmsMember" resultType="com.yiming.dongbao.ums.api.entity.UmsMember">
+        select id, username, password, icon, email, nick_name, note, login_time, gmt_create, gmt_modified, status from ums_member where id = #{id}
+    </select>
 
 </mapper>

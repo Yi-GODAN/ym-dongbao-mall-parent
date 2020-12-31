@@ -1,11 +1,11 @@
-package com.yiming.dongbao.ums.controller;
+package com.yiming.dongbao.portal.controller;
 
-
-import com.yiming.dongbao.ums.entity.UmsMember;
-import com.yiming.dongbao.ums.service.UmsMemberService;
+import com.yiming.dongbao.ums.api.entity.UmsMember;
+import com.yiming.dongbao.ums.api.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -23,20 +23,18 @@ public class UmsMemberController {
     @Autowired
     UmsMemberService umsMemberService;
 
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String hello() {
+        return "hello";
+    }
+
     @RequestMapping("/select")
     @ResponseBody
-    public String selectMember(Integer id) {
-        UmsMember umsMember = umsMemberService.getById(id);
+    public String selectMember(@RequestParam Integer id) {
+        UmsMember umsMember = umsMemberService.selectUmsMember(id);
         System.out.println(umsMember);
         return "success";
     }
-
-    @RequestMapping("/insert")
-    @ResponseBody
-    public String insertMember(UmsMember umsMember) {
-        boolean save = umsMemberService.save(umsMember);
-        return "success";
-    }
-
 }
 

@@ -1,7 +1,6 @@
 package com.yiming.dongbao.ums.mapper;
 
-import com.yiming.dongbao.ums.entity.UmsMember;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yiming.dongbao.ums.api.entity.UmsMember;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Repository;
  * @since 2020-12-30
  */
 @Repository
-public interface UmsMemberMapper extends BaseMapper<UmsMember> {
+public interface UmsMemberMapper {
+
+    UmsMember selectUmsMember(Integer id);
 
 }

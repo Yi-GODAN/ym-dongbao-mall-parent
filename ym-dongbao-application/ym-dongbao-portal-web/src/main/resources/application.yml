@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: dongbao-portal-web
+  profiles:
+    active: dev
+---
+server:
+  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: root
+      url: jdbc:mysql://192.168.1.200:3306/ym-dongbao-test?characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+  mvc:
+    static-path-pattern: /**
+mybatis:
+  mapper-locations: classpath:com/yiming/dongbao/ums/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com:
+      yiming:
+        dongbao:
+          ums:
+            mapper: debug

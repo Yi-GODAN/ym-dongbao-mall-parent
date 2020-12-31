@@ -1,9 +1,9 @@
 package com.yiming.dongbao.ums.service.impl;
 
-import com.yiming.dongbao.ums.entity.UmsMember;
+import com.yiming.dongbao.ums.api.entity.UmsMember;
 import com.yiming.dongbao.ums.mapper.UmsMemberMapper;
-import com.yiming.dongbao.ums.service.UmsMemberService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yiming.dongbao.ums.api.service.UmsMemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,14 @@ import org.springframework.stereotype.Service;
  * @since 2020-12-30
  */
 @Service
-public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
+public class UmsMemberServiceImpl implements UmsMemberService {
+
+    @Autowired
+    UmsMemberMapper umsMemberMapper;
+
+    public UmsMember selectUmsMember(Integer id) {
+        UmsMember umsMember = umsMemberMapper.selectUmsMember(id);
+        return umsMember;
+    }
 
 }
