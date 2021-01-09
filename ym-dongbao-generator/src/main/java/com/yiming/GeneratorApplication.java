@@ -16,7 +16,7 @@ public class GeneratorApplication {
         //全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setAuthor("YiMing")
-                .setOutputDir("F:\\ProgrammingSoft\\Java\\IntelliJ IDEA\\workspace\\ym-dongbao-mall-parent\\ym-dongbao-service\\ym-dongbao-ums\\src\\main\\java")//设置输出路径
+                .setOutputDir("F:\\ProgrammingSoft\\Java\\IntelliJ IDEA\\workspace\\ym-dongbao-mall-parent\\ym-dongbao-service\\ym-dongbao-ums\\src\\main\\java\\com\\yiming\\dongbao\\ums")//设置输出路径
                 .setFileOverride(true)//设置文件覆盖
                 .setIdType(IdType.AUTO)//设置主键生成策略
                 .setServiceName("%sService")//service接口的名称

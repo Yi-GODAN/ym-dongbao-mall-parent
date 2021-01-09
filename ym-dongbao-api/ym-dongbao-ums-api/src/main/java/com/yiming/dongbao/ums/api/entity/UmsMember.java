@@ -19,13 +19,22 @@ import java.time.LocalDateTime;
  */
 public class UmsMember implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5225238958213612691L;
 
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    /**
+     * 用户名
+     */
     private String username;
 
+    /**
+     * 密码
+     */
     private String password;
 
     /**

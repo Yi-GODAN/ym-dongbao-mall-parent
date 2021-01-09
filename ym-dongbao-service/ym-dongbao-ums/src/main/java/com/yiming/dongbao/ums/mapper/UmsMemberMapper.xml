@@ -4,26 +4,48 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yiming.dongbao.ums.api.entity.UmsMember">
-        <id column="id" property="id" />
-        <result column="username" property="username" />
-        <result column="password" property="password" />
-        <result column="icon" property="icon" />
-        <result column="email" property="email" />
-        <result column="nick_name" property="nickName" />
-        <result column="note" property="note" />
-        <result column="login_time" property="loginTime" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modified" property="gmtModified" />
-        <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="icon" property="icon"/>
+        <result column="email" property="email"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="note" property="note"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, username, password, icon, email, nick_name, note, login_time, gmt_create, gmt_modified, status
+        id
+        , username, password, icon, email, nick_name, note, login_time, gmt_create, gmt_modified, status
     </sql>
 
     <select id="selectUmsMember" resultType="com.yiming.dongbao.ums.api.entity.UmsMember">
-        select id, username, password, icon, email, nick_name, note, login_time, gmt_create, gmt_modified, status from ums_member where id = #{id}
+        select id,
+               username,
+               password,
+               icon,
+               email,
+               nick_name,
+               note,
+               login_time,
+               gmt_create,
+               gmt_modified,
+               status
+        from ums_member
+        where id = #{id}
+    </select>
+
+    <insert id="registerUmsMember" parameterType="com.yiming.dongbao.ums.api.entity.UmsMember">
+        insert into ums_member(username, password, icon, email, nick_name, gmt_create, gmt_modified)
+        values (#{username}, #{password}, #{icon}, #{email}, #{nickName}, #{gmtCreate}, #{gmtModified})
+    </insert>
+
+    <select id="selectUmsMemberByName" resultType="com.yiming.dongbao.ums.api.entity.UmsMember">
+
     </select>
 
 </mapper>

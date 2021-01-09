@@ -1,6 +1,8 @@
 package com.yiming.dongbao.ums.api.service;
 
 import com.yiming.dongbao.ums.api.entity.UmsMember;
+import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
+import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
 
 /**
  * <p>
@@ -10,8 +12,12 @@ import com.yiming.dongbao.ums.api.entity.UmsMember;
  * @author YiMing
  * @since 2020-12-30
  */
-public interface UmsMemberService  {
+public interface UmsMemberService {
 
     UmsMember selectUmsMember(Integer id);
+
+    int Register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
+
+    int selectUmsMemberByName(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
 
 }
