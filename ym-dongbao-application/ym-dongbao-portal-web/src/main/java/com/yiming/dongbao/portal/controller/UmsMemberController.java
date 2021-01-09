@@ -57,12 +57,14 @@ public class UmsMemberController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String loginValidate(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO){
+    public String loginValidate(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
         int count = umsMemberService.selectUmsMemberByName(umsMemberLoginParamDTO);
-        if (count == 1) {
-            return "login success!!!";
+        if (count == 0) {
+            return "user not found!";
+        } else if (count == -1) {
+            return "pwrong password!";
         } else {
-            return "username not found!!!";
+            return "login success!";
         }
     }
 

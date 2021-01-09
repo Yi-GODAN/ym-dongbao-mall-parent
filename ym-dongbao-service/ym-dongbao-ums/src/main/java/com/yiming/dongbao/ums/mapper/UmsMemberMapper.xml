@@ -44,8 +44,8 @@
         values (#{username}, #{password}, #{icon}, #{email}, #{nickName}, #{gmtCreate}, #{gmtModified})
     </insert>
 
-    <select id="selectUmsMemberByName" resultType="com.yiming.dongbao.ums.api.entity.UmsMember">
-
+    <select id="selectUmsMemberByName" resultType="java.lang.String">
+        select password from ums_member where username = #{username}
     </select>
 
 </mapper>

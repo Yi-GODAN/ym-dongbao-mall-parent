@@ -26,11 +26,6 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
     PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    public UmsMemberServiceImpl(UmsMemberMapper umsMemberMapper) {
-//        this.umsMemberMapper = umsMemberMapper;
-//    }
-
     @Autowired
     public UmsMemberServiceImpl(UmsMemberMapper umsMemberMapper, PasswordEncoder passwordEncoder) {
         this.umsMemberMapper = umsMemberMapper;
@@ -68,15 +63,25 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     }
 
     public int selectUmsMemberByName(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
-//        UmsMember umsMember = umsMemberMapper.selectUmsMemberByName(username);
         UmsMember umsMember = new UmsMember();
 
         // 将给定源bean的属性值复制到目标bean中。
         BeanUtils.copyProperties(umsMemberLoginParamDTO, umsMember);
 
-        // 查询用户是否存在
+        // 查询用户
         QueryWrapper<UmsMember> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", umsMember.getUsername());
-        return umsMemberMapper.selectCount(queryWrapper);
+        Integer userCount = umsMemberMapper.selectCount(queryWrapper);
+
+        // 判断用户是否存在
+        if (userCount == 0) return userCount;
+
+        // 验证密码
+        String password = umsMemberMapper.selectUmsMemberByName(umsMember.getUsername());
+        boolean matches = passwordEncoder.matches(umsMember.getPassword(), password);
+
+        if (!matches) return -1;
+        else return 1;
     }
+
 }

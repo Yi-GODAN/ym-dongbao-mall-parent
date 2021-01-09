@@ -19,5 +19,5 @@ public interface UmsMemberMapper extends BaseMapper<UmsMember> {
 
     int registerUmsMember(UmsMember umsMember);
 
-    UmsMember selectUmsMemberByName(String username);
+    String selectUmsMemberByName(String username);
 }
