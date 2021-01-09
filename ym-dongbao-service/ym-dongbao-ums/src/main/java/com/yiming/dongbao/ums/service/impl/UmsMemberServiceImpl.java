@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 public class UmsMemberServiceImpl implements UmsMemberService {
 
     UmsMemberMapper umsMemberMapper;
-
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -69,7 +68,13 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         return insertNum == 1 ? 1 : -1;
     }
 
-    public int selectUmsMemberByName(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
+    /**
+     * 登录
+     *
+     * @param umsMemberLoginParamDTO
+     * @return
+     */
+    public int login(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
         UmsMember umsMember = new UmsMember();
 
         // 将给定源bean的属性值复制到目标bean中。

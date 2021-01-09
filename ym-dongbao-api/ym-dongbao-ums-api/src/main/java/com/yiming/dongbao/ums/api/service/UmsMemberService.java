@@ -18,6 +18,6 @@ public interface UmsMemberService {
 
     int Register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
 
-    int selectUmsMemberByName(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
+    int login(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
 
 }

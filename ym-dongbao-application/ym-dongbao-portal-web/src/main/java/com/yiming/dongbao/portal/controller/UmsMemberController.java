@@ -54,7 +54,7 @@ public class UmsMemberController {
     @RequestMapping("/login")
     @ResponseBody
     public String loginValidate(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
-        int count = umsMemberService.selectUmsMemberByName(umsMemberLoginParamDTO);
+        int count = umsMemberService.login(umsMemberLoginParamDTO);
         return count == 0 ? "user not found!" : count == -1 ? "wrong password!" : "login success!";
     }
 
