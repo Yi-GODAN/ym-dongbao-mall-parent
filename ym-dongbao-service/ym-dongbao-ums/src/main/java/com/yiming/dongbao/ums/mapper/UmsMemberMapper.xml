@@ -44,8 +44,14 @@
         values (#{username}, #{password}, #{icon}, #{email}, #{nickName}, #{gmtCreate}, #{gmtModified})
     </insert>
 
-    <select id="selectUmsMemberByName" resultType="java.lang.String">
-        select password from ums_member where username = #{username}
+    <select id="selectUmsMemberPasswordByName" resultType="java.lang.String">
+        select password
+        from ums_member
+        where username = #{username}
+    </select>
+
+    <select id="selectUmsMemberCount" resultType="java.lang.Integer">
+        select count(*) from ums_member where username = #{username}
     </select>
 
 </mapper>

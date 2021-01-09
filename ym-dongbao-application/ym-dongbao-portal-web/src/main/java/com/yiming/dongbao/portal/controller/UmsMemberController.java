@@ -48,24 +48,14 @@ public class UmsMemberController {
     @ResponseBody
     public String registerMember(@RequestBody UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
         int register = umsMemberService.Register(umsMemberRegisterParamDTO);
-        if (register == 1) {
-            return "register success!!!";
-        } else {
-            return "register failed!!!";
-        }
+        return register == 0 ? "user already exists" : register == 1 ? "register success!" : "register failed!";
     }
 
     @RequestMapping("/login")
     @ResponseBody
     public String loginValidate(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
         int count = umsMemberService.selectUmsMemberByName(umsMemberLoginParamDTO);
-        if (count == 0) {
-            return "user not found!";
-        } else if (count == -1) {
-            return "pwrong password!";
-        } else {
-            return "login success!";
-        }
+        return count == 0 ? "user not found!" : count == -1 ? "wrong password!" : "login success!";
     }
 
 }

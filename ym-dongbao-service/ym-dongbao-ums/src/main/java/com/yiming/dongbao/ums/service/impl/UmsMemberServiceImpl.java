@@ -50,6 +50,12 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         // 将给定源bean的属性值复制到目标bean中。
         BeanUtils.copyProperties(umsMemberRegisterParamDTO, umsMember);
 
+        // 查询用户
+        int userCount = umsMemberMapper.selectUmsMemberCount(umsMember.getUsername());
+
+        // 判断用户是否存在
+        if (userCount == 1) return 0;
+
         // 密码加密
         String encode = passwordEncoder.encode(umsMemberRegisterParamDTO.getPassword());
         System.out.println("加密后的encode:" + encode);
@@ -59,7 +65,8 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
         // 插入数据
         int insertNum = umsMemberMapper.registerUmsMember(umsMember);
-        return insertNum;
+
+        return insertNum == 1 ? 1 : -1;
     }
 
     public int selectUmsMemberByName(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
@@ -77,11 +84,10 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         if (userCount == 0) return userCount;
 
         // 验证密码
-        String password = umsMemberMapper.selectUmsMemberByName(umsMember.getUsername());
+        String password = umsMemberMapper.selectUmsMemberPasswordByName(umsMember.getUsername());
         boolean matches = passwordEncoder.matches(umsMember.getPassword(), password);
 
-        if (!matches) return -1;
-        else return 1;
+        return matches == true ? 1 : -1;
     }
 
 }
