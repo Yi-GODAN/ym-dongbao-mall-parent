@@ -26,4 +26,10 @@
         <module>ym-dongbao-cms</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+
+        </dependency>
+    </dependencies>
+
 </project>

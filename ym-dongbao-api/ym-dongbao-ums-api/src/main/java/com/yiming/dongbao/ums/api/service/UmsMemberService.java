@@ -16,7 +16,7 @@ public interface UmsMemberService {
 
     UmsMember selectUmsMember(Integer id);
 
-    int Register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
+    int register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
 
     int login(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
 

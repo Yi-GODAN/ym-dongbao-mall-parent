@@ -43,7 +43,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
      * @return
      */
     @Override
-    public int Register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
+    public int register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
         UmsMember umsMember = new UmsMember();
 
         // 将给定源bean的属性值复制到目标bean中。
@@ -57,10 +57,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
         // 密码加密
         String encode = passwordEncoder.encode(umsMemberRegisterParamDTO.getPassword());
-        System.out.println("加密后的encode:" + encode);
-
         umsMember.setPassword(encode);
-        System.out.println(umsMember);
 
         // 插入数据
         int insertNum = umsMemberMapper.registerUmsMember(umsMember);

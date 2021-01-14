@@ -1,5 +1,6 @@
 package com.yiming.dongbao.portal.controller;
 
+import com.yiming.dongbao.common.base.result.ResultWrapper;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 /**
  * <p>
@@ -46,16 +49,21 @@ public class UmsMemberController {
 
     @RequestMapping("/register")
     @ResponseBody
-    public String registerMember(@RequestBody UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
-        int register = umsMemberService.Register(umsMemberRegisterParamDTO);
-        return register == 0 ? "user already exists" : register == 1 ? "register success!" : "register failed!";
+    public ResultWrapper registerMember(@RequestBody @Valid UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
+        int register = umsMemberService.register(umsMemberRegisterParamDTO);
+        return register == 0 ? ResultWrapper.getUserExistsBuilder().data(null).build() :
+                register == 1 ? ResultWrapper.getSuccessBuilder().data(null).build() :
+                        ResultWrapper.getFailedBuilder().data(null).build();
+
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    public String loginValidate(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
+    public ResultWrapper loginValidate(@RequestBody @Valid UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
         int count = umsMemberService.login(umsMemberLoginParamDTO);
-        return count == 0 ? "user not found!" : count == -1 ? "wrong password!" : "login success!";
+        return count == 0 ? ResultWrapper.getUserNotExistsBuilder().data(null).build() :
+                count == 1 ? ResultWrapper.getSuccessBuilder().data(null).build() :
+                        ResultWrapper.getPasswordFiledBuilder().data(null).build();
     }
 
 }
