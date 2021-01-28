@@ -53,7 +53,7 @@ public class ResultWrapper<T> implements Serializable {
     }
 
     /**
-     * 返回用户已存在的包装类
+     * 返回用户不存在的包装类
      *
      * @return ResultWrapper
      */
@@ -64,7 +64,7 @@ public class ResultWrapper<T> implements Serializable {
     /**
      * 返回密码错误的包装类
      *
-     * @return
+     * @return ResultWrapper
      */
     public static ResultWrapper.ResultWrapperBuilder getPasswordFiledBuilder() {
         return ResultWrapper.builder().code(StateCodeEnums.PASSWORD_FAILED.getCode()).msg(StateCodeEnums.PASSWORD_FAILED.getMsg());

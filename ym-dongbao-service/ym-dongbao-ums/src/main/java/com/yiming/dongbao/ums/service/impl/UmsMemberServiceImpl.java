@@ -1,9 +1,12 @@
 package com.yiming.dongbao.ums.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.yiming.dongbao.common.base.result.ResultWrapper;
+import com.yiming.dongbao.common.util.JwtUtil;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
+import com.yiming.dongbao.ums.api.entity.dto.UmsMemberEditParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
+import com.yiming.dongbao.ums.api.entity.response.UserMemberLoginResponse;
 import com.yiming.dongbao.ums.api.service.UmsMemberService;
 import com.yiming.dongbao.ums.mapper.UmsMemberMapper;
 import org.springframework.beans.BeanUtils;
@@ -43,7 +46,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
      * @return
      */
     @Override
-    public int register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
+    public ResultWrapper register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
         UmsMember umsMember = new UmsMember();
 
         // 将给定源bean的属性值复制到目标bean中。
@@ -53,7 +56,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         int userCount = umsMemberMapper.selectUmsMemberCount(umsMember.getUsername());
 
         // 判断用户是否存在
-        if (userCount == 1) return 0;
+        if (userCount == 1) return ResultWrapper.getUserExistsBuilder().build();
 
         // 密码加密
         String encode = passwordEncoder.encode(umsMemberRegisterParamDTO.getPassword());
@@ -62,7 +65,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         // 插入数据
         int insertNum = umsMemberMapper.registerUmsMember(umsMember);
 
-        return insertNum == 1 ? 1 : -1;
+        return insertNum == 1 ? ResultWrapper.getSuccessBuilder().build() : ResultWrapper.getFailedBuilder().build();
     }
 
     /**
@@ -71,25 +74,59 @@ public class UmsMemberServiceImpl implements UmsMemberService {
      * @param umsMemberLoginParamDTO
      * @return
      */
-    public int login(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
+    public ResultWrapper login(UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
         UmsMember umsMember = new UmsMember();
 
         // 将给定源bean的属性值复制到目标bean中。
         BeanUtils.copyProperties(umsMemberLoginParamDTO, umsMember);
 
         // 查询用户
-        QueryWrapper<UmsMember> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", umsMember.getUsername());
-        Integer userCount = umsMemberMapper.selectCount(queryWrapper);
+        UmsMember umsMemberForName = umsMemberMapper.selectUmsMemberByName(umsMember.getUsername());
 
         // 判断用户是否存在
-        if (userCount == 0) return userCount;
+        if (umsMemberForName == null) return ResultWrapper.getUserNotExistsBuilder().build();
 
         // 验证密码
-        String password = umsMemberMapper.selectUmsMemberPasswordByName(umsMember.getUsername());
-        boolean matches = passwordEncoder.matches(umsMember.getPassword(), password);
+        boolean matches = passwordEncoder.matches(umsMember.getPassword(), umsMemberForName.getPassword());
 
-        return matches == true ? 1 : -1;
+        // 判断密码是否正确
+        if (!matches) {
+            return ResultWrapper.getPasswordFiledBuilder().build();
+        }
+
+        // 生成token
+        String token = JwtUtil.createToken(umsMember.getUsername());
+
+        // 生成返回登录包装类
+        UserMemberLoginResponse loginResponse = new UserMemberLoginResponse();
+
+        // 去除密码
+        umsMemberForName.setPassword(null);
+
+        // 设置token
+        loginResponse.setToken(token);
+
+        // 设置umsMember
+        loginResponse.setUmsMember(umsMemberForName);
+
+        return ResultWrapper.getSuccessBuilder().data(loginResponse).build();
+    }
+
+    @Override
+    public ResultWrapper edit(UmsMemberEditParamDTO umsMemberEditParamDTO) {
+        UmsMember umsMember = new UmsMember();
+
+        // 将给定源bean的属性值复制到目标bean中。
+        BeanUtils.copyProperties(umsMemberEditParamDTO, umsMember);
+
+        try {
+            umsMemberMapper.updateById(umsMember);
+        } catch (Exception e) {
+            return ResultWrapper.getFailedBuilder().data("用户名已存在").build();
+        }
+
+        return ResultWrapper.getSuccessBuilder().data(umsMember).build();
+
     }
 
 }

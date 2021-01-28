@@ -1,6 +1,8 @@
 package com.yiming.dongbao.ums.api.service;
 
+import com.yiming.dongbao.common.base.result.ResultWrapper;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
+import com.yiming.dongbao.ums.api.entity.dto.UmsMemberEditParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
 
@@ -16,8 +18,9 @@ public interface UmsMemberService {
 
     UmsMember selectUmsMember(Integer id);
 
-    int register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
+    ResultWrapper register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
 
-    int login(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
+    ResultWrapper login(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
 
+    ResultWrapper edit(UmsMemberEditParamDTO umsMemberEditParamDTO);
 }

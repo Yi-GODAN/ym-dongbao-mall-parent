@@ -1,8 +1,10 @@
 package com.yiming.dongbao.portal.controller;
 
+import com.yiming.dongbao.common.base.annotations.TokenCheck;
 import com.yiming.dongbao.common.base.result.ResultWrapper;
 import com.yiming.dongbao.common.util.JwtUtil;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
+import com.yiming.dongbao.ums.api.entity.dto.UmsMemberEditParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
 import com.yiming.dongbao.ums.api.service.UmsMemberService;
@@ -48,34 +50,19 @@ public class UmsMemberController {
     @RequestMapping("/register")
     @ResponseBody
     public ResultWrapper registerMember(@RequestBody @Valid UmsMemberRegisterParamDTO umsMemberRegisterParamDTO) {
-        int register = umsMemberService.register(umsMemberRegisterParamDTO);
-        return register == 0 ? ResultWrapper.getUserExistsBuilder().data(null).build() :
-                register == 1 ? ResultWrapper.getSuccessBuilder().data(null).build() :
-                        ResultWrapper.getFailedBuilder().data(null).build();
-
+        return umsMemberService.register(umsMemberRegisterParamDTO);
     }
 
     @RequestMapping("/login")
     @ResponseBody
     public ResultWrapper loginValidate(@RequestBody @Valid UmsMemberLoginParamDTO umsMemberLoginParamDTO) {
-        int count = umsMemberService.login(umsMemberLoginParamDTO);
-        return count == 0 ? ResultWrapper.getUserNotExistsBuilder().data(null).build() :
-                count == 1 ? ResultWrapper.getSuccessBuilder().data(null).build() :
-                        ResultWrapper.getPasswordFiledBuilder().data(null).build();
+        return umsMemberService.login(umsMemberLoginParamDTO);
     }
 
-    /**
-     * 测试
-     *
-     * @param subject
-     * @return
-     */
-    @GetMapping("/test-verify")
-    public String verify(String subject) {
-        String token = JwtUtil.createToken(subject);
-        System.out.println("token:" + token);
-        String parseToken = JwtUtil.parseToken(token);
-        System.out.println("parseToken:" + parseToken);
-        return token;
+    @RequestMapping("/edit")
+    @ResponseBody
+    @TokenCheck
+    public ResultWrapper edit(@RequestBody @Valid UmsMemberEditParamDTO umsMemberEditParamDTO) {
+        return umsMemberService.edit(umsMemberEditParamDTO);
     }
 }

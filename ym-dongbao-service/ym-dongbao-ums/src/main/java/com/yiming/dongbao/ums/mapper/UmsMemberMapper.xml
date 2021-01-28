@@ -51,7 +51,24 @@
     </select>
 
     <select id="selectUmsMemberCount" resultType="java.lang.Integer">
-        select count(*) from ums_member where username = #{username}
+        select count(*)
+        from ums_member
+        where username = #{username}
     </select>
 
+    <select id="selectUmsMemberByName" resultType="com.yiming.dongbao.ums.api.entity.UmsMember">
+        select id,
+               username,
+               password,
+               icon,
+               email,
+               nick_name,
+               note,
+               login_time,
+               gmt_create,
+               gmt_modified,
+               status
+        from ums_member
+        where username = #{username}
+    </select>
 </mapper>

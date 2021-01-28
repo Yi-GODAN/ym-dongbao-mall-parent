@@ -17,6 +17,8 @@ public interface UmsMemberMapper extends BaseMapper<UmsMember> {
 
     UmsMember selectUmsMember(Integer id);
 
+    UmsMember selectUmsMemberByName(String username);
+
     int registerUmsMember(UmsMember umsMember);
 
     int selectUmsMemberCount(String username);
