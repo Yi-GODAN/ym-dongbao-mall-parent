@@ -14,7 +14,9 @@ import java.util.Date;
  */
 public class JwtUtil {
 
-    // 密钥
+    /**
+     * 密钥
+     */
     private static final String secret = "I'm a Handsome man";
 
     /**
@@ -23,9 +25,22 @@ public class JwtUtil {
      * @param subject
      * @return string
      */
-    public static String createToken(String subject) {
+    public static String createAccessToken(String subject) {
         return Jwts.builder().setSubject(subject)
                 .setExpiration(new Date(System.nanoTime() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+    }
+
+    /**
+     * 生成令牌
+     *
+     * @param subject
+     * @return string
+     */
+    public static String createRefreshToken(String subject) {
+        return Jwts.builder().setSubject(subject)
+                .setExpiration(new Date(System.nanoTime() + 1000 * 60 * 60 * 2))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }

@@ -30,11 +30,18 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         log.info("AuthInterceptor preHandle parameter request:{}, response:{}, handler:{}", request, response, handler);
 
-        String token = request.getHeader("token");
+        String accessToken = request.getHeader("accessToken");
 
-        if (StringUtils.isNullOrEmpty(token)) {
-            log.error("AuthInterceptor preHandle token is null!");
-            throw new TokenException("token 为空");
+        String refreshToken = request.getHeader("refreshToken");
+
+        if (StringUtils.isNullOrEmpty(accessToken)) {
+            log.error("AuthInterceptor preHandle accessToken is null!");
+            throw new TokenException("accessToken 为空");
+        }
+
+        if (StringUtils.isNullOrEmpty(refreshToken)) {
+            log.error("AuthInterceptor preHandle refreshToken is null!");
+            throw new TokenException("refreshToken 为空");
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -44,13 +51,18 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (method.isAnnotationPresent(TokenCheck.class)) {
             TokenCheck annotation = method.getAnnotation(TokenCheck.class);
             if (annotation.required()) {
-                // 校验Token
+                // 校验accessToken
                 try {
-                    JwtUtil.parseToken(token);
-                    return true;
+                    JwtUtil.parseToken(accessToken);
                 } catch (Exception e) {
-                    log.error("AuthInterceptor preHandle token is error!");
-                    throw new TokenException("token 异常");
+                    log.error("AuthInterceptor preHandle accessToken is error!");
+                    try {
+                        // 校验refreshToken
+                        JwtUtil.parseToken(refreshToken);
+                    } catch (Exception ex) {
+                        log.error("AuthInterceptor preHandle refreshToken is error!");
+                        throw new TokenException("refreshToken 异常");
+                    }
                 }
             }
         }

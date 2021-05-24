@@ -13,9 +13,14 @@ import lombok.Data;
 public class UserMemberLoginResponse {
 
     /**
-     * 令牌
+     * 登录令牌
      */
-    private String token;
+    private String accessToken;
+
+    /**
+     * 刷新令牌
+     */
+    private String refreshToken;
 
     /**
      * UmsMember

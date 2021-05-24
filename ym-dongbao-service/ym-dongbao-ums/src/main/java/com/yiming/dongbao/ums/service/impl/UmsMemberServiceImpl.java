@@ -1,6 +1,5 @@
 package com.yiming.dongbao.ums.service.impl;
 
-import com.alibaba.druid.util.JdbcUtils;
 import com.yiming.dongbao.common.base.result.ResultWrapper;
 import com.yiming.dongbao.common.util.JwtUtil;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
@@ -14,7 +13,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -96,8 +94,11 @@ public class UmsMemberServiceImpl implements UmsMemberService {
             return ResultWrapper.getPasswordFiledBuilder().build();
         }
 
-        // 生成token
-        String token = JwtUtil.createToken(umsMember.getUsername());
+        // 生成accessToken
+        String accessToken = JwtUtil.createAccessToken(umsMember.getUsername());
+
+        // 生成refreshToken
+        String refreshToken = JwtUtil.createRefreshToken(umsMember.getUsername());
 
         // 生成返回登录包装类
         UserMemberLoginResponse loginResponse = new UserMemberLoginResponse();
@@ -105,8 +106,11 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         // 去除密码
         umsMemberForName.setPassword(null);
 
-        // 设置token
-        loginResponse.setToken(token);
+        // 设置accessToken
+        loginResponse.setAccessToken(accessToken);
+
+        // 设置refreshToken
+        loginResponse.setRefreshToken(refreshToken);
 
         // 设置umsMember
         loginResponse.setUmsMember(umsMemberForName);
