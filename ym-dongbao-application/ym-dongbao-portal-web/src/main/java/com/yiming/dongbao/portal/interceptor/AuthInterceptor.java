@@ -2,7 +2,10 @@ package com.yiming.dongbao.portal.interceptor;
 
 import com.mysql.cj.util.StringUtils;
 import com.yiming.dongbao.common.base.annotations.TokenCheck;
+import com.yiming.dongbao.common.base.exception.TokenException;
 import com.yiming.dongbao.common.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,15 +23,18 @@ import java.lang.reflect.Method;
  */
 public class AuthInterceptor implements HandlerInterceptor {
 
+    private static final Logger log = LoggerFactory.getLogger(AuthInterceptor.class);
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("拦截器进入");
+        log.info("AuthInterceptor preHandle parameter request:{}, response:{}, handler:{}", request, response, handler);
 
         String token = request.getHeader("token");
 
         if (StringUtils.isNullOrEmpty(token)) {
-            throw new LoginException("token为空");
+            log.error("AuthInterceptor preHandle token is null!");
+            throw new TokenException("token 为空");
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -43,8 +49,8 @@ public class AuthInterceptor implements HandlerInterceptor {
                     JwtUtil.parseToken(token);
                     return true;
                 } catch (Exception e) {
-                    response.sendError(105, "token错误");
-                    return false;
+                    log.error("AuthInterceptor preHandle token is error!");
+                    throw new TokenException("token 异常");
                 }
             }
         }
