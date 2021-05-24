@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(TokenException.class)
     public ResultWrapper loginException(Exception e) {
-        return ResultWrapper.getFailedBuilder().msg(e.getMessage()).build();
+        return ResultWrapper.getFailedBuilder().code(302).msg(e.getMessage()).build();
     }
 
 }
