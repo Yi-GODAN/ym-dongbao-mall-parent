@@ -2,7 +2,6 @@ package com.yiming.dongbao.portal.controller;
 
 import com.yiming.dongbao.common.base.annotations.TokenCheck;
 import com.yiming.dongbao.common.base.result.ResultWrapper;
-import com.yiming.dongbao.common.util.JwtUtil;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberEditParamDTO;
 import com.yiming.dongbao.ums.api.entity.dto.UmsMemberLoginParamDTO;
@@ -10,7 +9,10 @@ import com.yiming.dongbao.ums.api.entity.dto.UmsMemberRegisterParamDTO;
 import com.yiming.dongbao.ums.api.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 

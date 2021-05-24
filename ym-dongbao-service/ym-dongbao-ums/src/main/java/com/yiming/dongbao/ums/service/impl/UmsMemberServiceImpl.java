@@ -1,5 +1,6 @@
 package com.yiming.dongbao.ums.service.impl;
 
+import com.alibaba.druid.util.JdbcUtils;
 import com.yiming.dongbao.common.base.result.ResultWrapper;
 import com.yiming.dongbao.common.util.JwtUtil;
 import com.yiming.dongbao.ums.api.entity.UmsMember;
@@ -13,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
