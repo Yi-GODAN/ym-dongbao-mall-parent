@@ -1,8 +1,13 @@
 package com.yiming.dongbao.ums;
 
+import com.yiming.dongbao.ums.api.entity.UmsMember;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.DigestUtils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @Program: ym-dongbao-mall-parent
